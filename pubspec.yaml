@@ -35,6 +35,7 @@ dependencies:
   logging: ^1.2.0
   cupertino_icons: ^1.0.8
   google_fonts: ^6.2.1
+  flutter_bounce: ^1.1.0
 
 
 dev_dependencies:
@@ -58,6 +59,7 @@ flutter:
   assets:
     - assets/music/
     - assets/sounds/
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

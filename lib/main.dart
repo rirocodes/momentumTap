@@ -1,10 +1,10 @@
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'audio/audio_controller.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
 
 void main() async {
   Logger.root.level = Level.INFO;
@@ -85,11 +85,26 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        backgroundColor: Color.fromARGB(255, 155, 130, 92),
+        // backgroundColor: Color.fromARGB(255, 158, 128, 84),
+        // backgroundColor: Color.fromARGB(255, 158, 128, 84),
+        // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(
+          widget.title,
+          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white70),
+        ),
       ),
       body: Stack(
         children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image:
+                    AssetImage('assets/images/paper.jpg'), // Path to your image
+                fit: BoxFit.cover, // Adjust to fit the screen
+              ),
+            ),
+          ),
           Positioned(
             top: 16,
             right: 16,
@@ -97,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: toggleMute,
               child: Icon(
                 isMuted ? Icons.volume_off : Icons.volume_up,
-                color: Colors.black,
+                color: const Color.fromARGB(255, 59, 59, 59),
                 size: 30,
               ),
             ),
@@ -110,13 +125,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
+                    'Click to collect rewards!\n (coming soon)',
+                    style: GoogleFonts.play(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(21.0),
+                  child: Text(
                     'Score: $_counter',
                     style: GoogleFonts.play(
-                      textStyle: Theme.of(context).textTheme.displayLarge,
-                      fontSize: 26,
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.italic,
-                    ),
+                        backgroundColor:
+                            const Color.fromARGB(198, 255, 224, 132),
+                        textStyle: Theme.of(context).textTheme.displayLarge,
+                        fontSize: 26,
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.italic,
+                        color: const Color.fromARGB(255, 59, 59, 59)),
                   ),
                 ),
               ],
@@ -141,32 +167,36 @@ class _ClickerBtnState extends State<ClickerBtn> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
+        // onTap: () => {widget.onTap()},
+        child: Bounce(
+      duration: Duration(milliseconds: 100),
+      onPressed: () => {widget.onTap()},
       child: Container(
         width: 250,
         height: 250,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 187, 139, 41),
+          color: Color.fromARGB(193, 247, 196, 44),
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: const Color.fromARGB(255, 130, 130, 123),
+              color: const Color.fromARGB(179, 161, 161, 161),
+              // color: Color.fromARGB(255, 247, 197, 44),
               blurRadius: 6,
               offset: const Offset(5, 8),
             ),
           ],
         ),
-        child: const Center(
-          child: Text(
-            'Click me',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        // child: const Center(
+        //   child: Text(
+        //     'Click me',
+        //     style: TextStyle(
+        //       color: Colors.white,
+        //       fontSize: 20,
+        //       fontWeight: FontWeight.bold,
+        //     ),
+        //   ),
+        // ),
       ),
-    );
+    ));
   }
 }
